@@ -14,7 +14,7 @@ const Nav = ({ ...props }: NavProps): JSX.Element => {
   }
 
   return (
-    <nav className="flex justify-between items-center p-5 bg-white">
+    <nav className="flex justify-between items-center p-5">
       <div className="text-2xl font-bold flex-grow-0">Purposeful</div>
       <div className="flex-grow"></div>
       {sessionId ? (

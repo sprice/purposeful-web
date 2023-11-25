@@ -1,5 +1,6 @@
 "use client"
 import React from "react"
+import Image from "next/image"
 
 interface HeroProps {
   /**
@@ -68,10 +69,13 @@ const Hero = ({ label, onClick, ...props }: HeroProps) => {
           </div>
         </div>
         <div className="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-          <img
+          <Image
             className="aspect-[3/2] object-cover lg:aspect-auto lg:h-full lg:w-full"
             src="/images/brain.png"
             alt=""
+            width={1024}
+            height={1792}
+            priority
           />
         </div>
       </div>
