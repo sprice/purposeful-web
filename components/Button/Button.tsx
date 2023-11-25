@@ -14,7 +14,7 @@ interface ButtonProps {
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ label, onClick, ...props }: ButtonProps) => {
+const Button = ({ label, onClick, ...props }: ButtonProps) => {
   return (
     <button
       type="button"
@@ -26,3 +26,5 @@ export const Button = ({ label, onClick, ...props }: ButtonProps) => {
     </button>
   )
 }
+
+export default Button

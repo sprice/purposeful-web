@@ -1,13 +1,13 @@
 import React from "react"
 
-import { Header } from "../Header/Header"
+import { Header } from "../"
 import "./page.css"
 
 type User = {
   name: string
 }
 
-export const Page: React.FC = () => {
+const Page: React.FC = () => {
   const [user, setUser] = React.useState<User>()
 
   return (
@@ -89,3 +89,5 @@ export const Page: React.FC = () => {
     </article>
   )
 }
+
+export default Page

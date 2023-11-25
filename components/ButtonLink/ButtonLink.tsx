@@ -19,12 +19,7 @@ interface ButtonLinkProps {
 /**
  * Primary UI component for user interaction
  */
-export const ButtonLink = ({
-  label,
-  href,
-  className,
-  ...props
-}: ButtonLinkProps) => {
+const ButtonLink = ({ label, href, className, ...props }: ButtonLinkProps) => {
   return (
     <Link
       className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${className}`}
@@ -35,3 +30,5 @@ export const ButtonLink = ({
     </Link>
   )
 }
+
+export default ButtonLink
