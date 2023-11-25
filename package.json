@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "npx prettier --write './{app,utils}/**/*.{js,ts,tsx,jsx,json,md}'"
+    "format": "npx prettier --write './{app,utils}/**/*.{js,ts,tsx,jsx,json,md}'",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@clerk/nextjs": "4.26.2",
@@ -26,7 +28,17 @@
     "typescript": "5.1.3"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.5.3",
+    "@storybook/addon-interactions": "^7.5.3",
+    "@storybook/addon-links": "^7.5.3",
+    "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/blocks": "^7.5.3",
+    "@storybook/nextjs": "^7.5.3",
+    "@storybook/react": "^7.5.3",
+    "@storybook/testing-library": "^0.2.2",
+    "eslint-plugin-storybook": "^0.6.15",
     "prettier": "3.1.0",
-    "prisma": "5.5.2"
+    "prisma": "5.5.2",
+    "storybook": "^7.5.3"
   }
 }

@@ -14,6 +14,8 @@ const createNewUser = async () => {
     },
   })
 
+  console.log("user", user)
+
   if (!match) {
     await prisma.user.create({
       data: {
