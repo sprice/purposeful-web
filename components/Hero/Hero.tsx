@@ -41,7 +41,7 @@ const Hero = ({ label, onClick, ...props }: HeroProps) => {
 
             <div className="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
               <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                <h1 className="text-4xl font-display font-bold tracking-tight text-gray-900 sm:text-6xl">
                   Using Brain Science <span className="amp">&amp;</span>{" "}
                   Coaching To Create High Performing Teams
                 </h1>

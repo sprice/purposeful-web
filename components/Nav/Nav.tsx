@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
-import { ButtonLink } from ".."
+import Link from "next/link"
+import { ButtonLink, Logo } from ".."
 import { UserButton } from "@clerk/nextjs"
 import { useAuth } from "@clerk/nextjs"
 
@@ -15,7 +16,11 @@ const Nav = ({ ...props }: NavProps): JSX.Element => {
 
   return (
     <nav className="flex justify-between items-center p-5">
-      <div className="text-2xl font-bold flex-grow-0">Purposeful</div>
+      <div className="text-2xl font-bold flex-grow-0">
+        <Link href="/">
+          <Logo />
+        </Link>
+      </div>
       <div className="flex-grow"></div>
       {sessionId ? (
         <UserButton afterSignOutUrl="/" />

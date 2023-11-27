@@ -1,10 +1,9 @@
-import { Nav } from "@/components"
+import { Layout } from "@/components"
 
 export default function Dashboard() {
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <Nav />
+    <Layout>
       <h1>Dashboard</h1>
-    </div>
+    </Layout>
   )
 }

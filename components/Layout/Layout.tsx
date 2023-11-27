@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Footer, Nav } from "@/components"
+import { Footer, Nav } from "../"
 
 interface LayoutProps {
   /**
@@ -10,9 +10,9 @@ interface LayoutProps {
 
 const Layout = ({ children, ...props }: LayoutProps) => {
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col min-h-screen mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <Nav />
-      {children}
+      <div className="flex-grow">{children}</div>
       <Footer />
     </div>
   )

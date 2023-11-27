@@ -4,6 +4,7 @@ import Footer from "./Footer/Footer"
 import Header from "./Header/Header"
 import Hero from "./Hero/Hero"
 import Layout from "./Layout/Layout"
+import Logo from "./Logo/Logo"
 import Nav from "./Nav/Nav"
 import Page from "./Page/Page"
 import PrimaryCTA from "./PrimaryCTA/PrimaryCTA"
@@ -16,6 +17,7 @@ export {
   Header,
   Hero,
   Layout,
+  Logo,
   Nav,
   Page,
   PrimaryCTA,
