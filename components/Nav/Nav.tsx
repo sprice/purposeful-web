@@ -23,7 +23,12 @@ const Nav = ({ ...props }: NavProps): JSX.Element => {
       </div>
       <div className="flex-grow"></div>
       {sessionId ? (
-        <UserButton afterSignOutUrl="/" />
+        <>
+          <Link href="/dashboard" className="mr-5">
+            Dashboard
+          </Link>
+          <UserButton afterSignOutUrl="/" />
+        </>
       ) : (
         <>
           <ButtonLink className="mr-5" label="Sign In" href="/sign-in" />

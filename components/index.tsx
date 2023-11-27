@@ -2,6 +2,7 @@ import Button from "./Button/Button"
 import ButtonLink from "./ButtonLink/ButtonLink"
 import Footer from "./Footer/Footer"
 import Header from "./Header/Header"
+import HeaderSection from "./HeaderSection/HeaderSection"
 import Hero from "./Hero/Hero"
 import Layout from "./Layout/Layout"
 import Logo from "./Logo/Logo"
@@ -15,6 +16,7 @@ export {
   ButtonLink,
   Footer,
   Header,
+  HeaderSection,
   Hero,
   Layout,
   Logo,

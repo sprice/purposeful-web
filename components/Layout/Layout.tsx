@@ -5,7 +5,7 @@ interface LayoutProps {
   /**
    * Children elements
    */
-  children?: ReactNode
+  children: ReactNode
 }
 
 const Layout = ({ children, ...props }: LayoutProps) => {
