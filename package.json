@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "npx prettier --write './{app,utils}/**/*.{js,ts,tsx,jsx,json,md}'",
+    "format:pr": "npx prettier --write './{app,components,utils}/**/*.{js,ts,tsx,jsx,json,md}'",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format:ts": "tsc --noEmit --project tsconfig.json",
+    "format": "yarn run lint && yarn run format:pr && yarn run format:ts"
   },
   "dependencies": {
     "@clerk/nextjs": "4.26.2",
@@ -41,6 +43,7 @@
     "eslint-plugin-storybook": "0.6.15",
     "prettier": "3.1.0",
     "prisma": "5.5.2",
-    "storybook": "7.5.3"
+    "storybook": "7.5.3",
+    "tsc": "^2.0.4"
   }
 }

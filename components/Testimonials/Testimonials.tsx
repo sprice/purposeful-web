@@ -1,4 +1,5 @@
 import React from "react"
+import Image from "next/image"
 
 interface TestimonialsProps {
   /**
@@ -95,9 +96,11 @@ const Testimonials = ({ label, onClick, ...props }: TestimonialsProps) => {
                     <p>{`“${testimonial.body}”`}</p>
                   </blockquote>
                   <figcaption className="mt-6 flex items-center gap-x-4">
-                    <img
-                      className="h-10 w-10 rounded-full bg-gray-50"
+                    <Image
                       src={testimonial.author.imageUrl}
+                      width={256}
+                      height={256}
+                      className="h-10 w-10 rounded-full bg-gray-50"
                       alt=""
                     />
                     <div>
