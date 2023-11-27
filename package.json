@@ -11,7 +11,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "format:ts": "tsc --noEmit --project tsconfig.json",
-    "format": "yarn run lint && yarn run format:pr && yarn run format:ts"
+    "format": "yarn run lint && yarn run format:pr && yarn run format:ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@clerk/nextjs": "4.26.2",
