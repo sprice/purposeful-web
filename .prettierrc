@@ -1,4 +1,14 @@
 {
   "semi": false,
-  "singleQuote": false
+  "singleQuote": false,
+  "proseWrap": "always",
+  "printWidth": 95,
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "printWidth": 80
+      }
+    }
+  ]
 }

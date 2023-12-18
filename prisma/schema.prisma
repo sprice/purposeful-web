@@ -1,21 +1,201 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model User {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   clerkId String @unique
-  email String @unique
+  email   String @unique
+  slug    String @unique
+
+  screenResponses ScreenResponse[]
+  organizations   OrganizationMembership[]
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String @unique
+
+  users OrganizationMembership[]
+}
+
+model OrganizationMembership {
+  userId         String
+  organizationId String
+
+  user         User         @relation(fields: [userId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
+
+  @@id([userId, organizationId])
+  @@index([organizationId])
+  @@index([userId])
+}
+
+enum QUESTION_TYPES {
+  SINGLE_SELECT_LIST
+  ONE_OF_MANY
+  MULTI_SELECT_LIST
+  TEXTBOX
+  TEXTAREA
+  DATE
+}
+
+model QuestionType {
+  id String @id @default(uuid())
+
+  questionType QUESTION_TYPES
+
+  contentScreen ContentScreenSection[]
+
+  @@index([questionType])
+}
+
+enum SECTION_TYPES {
+  PRIMARY
+  SECONDARY
+  TERTIARY
+  QUATERNARY
+  QUINARY
+}
+
+enum VIDEO_SOURCE {
+  YOUTUBE
+  MUX
+}
+
+model SectionType {
+  id String @id @default(uuid())
+
+  sectionType SECTION_TYPES
+
+  contentScreen ContentScreenSection[]
+
+  @@index([sectionType])
+}
+
+model Video {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  videoUrl String
+  source   VIDEO_SOURCE
+
+  // change to videoUrl and videoType
+
+  contentScreenSectionId String               @unique
+  contentScreenSection   ContentScreenSection @relation(fields: [contentScreenSectionId], references: [id], onDelete: Cascade)
+
+  @@index([contentScreenSectionId])
+}
+
+model ContentScreenSection {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  text   String? @db.Text
+  weight Int
+
+  // Optional one-to-one relationship with Video
+  video Video?
+
+  typeId          String? // Optional QuestionType
+  sectionId       String
+  contentScreenId String
+  screenResponse  ScreenResponse[]
+  type            QuestionType?    @relation(fields: [typeId], references: [id])
+  section         SectionType      @relation(fields: [sectionId], references: [id])
+  contentScreen   ContentScreen    @relation(fields: [contentScreenId], references: [id])
+
+  @@index([sectionId, contentScreenId])
+  @@index([typeId])
+  @@index([sectionId])
+  @@index([contentScreenId])
+}
+
+model ContentScreen {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title       String
+  description String @db.Text
+
+  collectionId String
+
+  collection            Collection             @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  contentScreenSections ContentScreenSection[]
+
+  @@unique([collectionId, id])
+}
+
+model Collection {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title String
+
+  moduleId String
+  module   Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  contentScreen ContentScreen[]
+
+  @@unique([moduleId, id])
+}
+
+model Module {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title String
+
+  author String
+
+  sectionId String
+  section   Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  collection Collection[]
+
+  @@unique([sectionId, id])
+}
+
+model Section {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title String
+
+  module Module[]
+}
+
+model ScreenResponse {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  answer String @db.Text
+
+  contentScreenSectionId String
+  userId                 String
+  contentScreenSection   ContentScreenSection @relation(fields: [contentScreenSectionId], references: [id])
+  user                   User                 @relation(fields: [userId], references: [id])
+
+  @@unique([contentScreenSectionId, userId, id])
+  @@index([userId])
 }
