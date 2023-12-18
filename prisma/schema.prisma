@@ -18,6 +18,7 @@ model User {
   slug    String @unique
 
   screenResponses ScreenResponse[]
+  formSubmissions FormSubmission[]
   organizations   OrganizationMembership[]
 }
 
@@ -53,16 +54,6 @@ enum QUESTION_TYPES {
   DATE
 }
 
-model QuestionType {
-  id String @id @default(uuid())
-
-  questionType QUESTION_TYPES
-
-  contentScreen ContentScreenSection[]
-
-  @@index([questionType])
-}
-
 enum SECTION_TYPES {
   PRIMARY
   SECONDARY
@@ -74,16 +65,6 @@ enum SECTION_TYPES {
 enum VIDEO_SOURCE {
   YOUTUBE
   MUX
-}
-
-model SectionType {
-  id String @id @default(uuid())
-
-  sectionType SECTION_TYPES
-
-  contentScreen ContentScreenSection[]
-
-  @@index([sectionType])
 }
 
 model Video {
@@ -117,8 +98,8 @@ model ContentScreenSection {
   sectionId       String
   contentScreenId String
   screenResponse  ScreenResponse[]
-  type            QuestionType?    @relation(fields: [typeId], references: [id])
-  section         SectionType      @relation(fields: [sectionId], references: [id])
+  type            QUESTION_TYPES?
+  section         SECTION_TYPES
   contentScreen   ContentScreen    @relation(fields: [contentScreenId], references: [id])
 
   @@index([sectionId, contentScreenId])
@@ -185,17 +166,35 @@ model Section {
   module Module[]
 }
 
+model FormSubmission {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  screenResponses ScreenResponse[]
+
+  @@index([userId])
+}
+
 model ScreenResponse {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   answer String @db.Text
 
   contentScreenSectionId String
   userId                 String
+  formSubmissionId       String
   contentScreenSection   ContentScreenSection @relation(fields: [contentScreenSectionId], references: [id])
   user                   User                 @relation(fields: [userId], references: [id])
+  formSubmission         FormSubmission       @relation(fields: [formSubmissionId], references: [id], onDelete: Cascade)
 
-  @@unique([contentScreenSectionId, userId, id])
+  @@unique([formSubmissionId, contentScreenSectionId, userId, id])
   @@index([userId])
+  @@index([contentScreenSectionId])
+  @@index([formSubmissionId])
 }
